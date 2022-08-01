@@ -1,6 +1,20 @@
-import React from "react";
+import { useState, useEffect} from "react";
 
 function CategoriesDB() {
+
+    const [ categorias, setCategorias] = useState([]);
+
+    useEffect( () => {
+        console.log( '%cse monto el componente', 'color:green');
+        fetch('http://localhost:5020/api/categorias/ofertas')
+            .then( response => response.json())
+            .then( dato => {
+                setCategorias(dato.data[0].ofertas)
+            })
+            .catch( error => console.error( '%c${error}', 'color: red' ));
+
+    }, []);
+
     return(
         <div className="col-lg-6 mb-4">						
         <div className="card shadow mb-4">
@@ -12,7 +26,7 @@ function CategoriesDB() {
                     <div className="col-lg-6 mb-4">
                         <div className="card bg-info text-white shadow">
                             <div className="card-body">
-                                Paquetes en oferta:
+                                Paquetes en oferta: { categorias }
                             </div>
                         </div>
                     </div>
