@@ -2,16 +2,56 @@ import { useState, useEffect} from "react";
 
 function CategoriesDB() {
 
-    const [ categorias, setCategorias] = useState([]);
+    const [ ofertas, setOfertas] = useState([]);
+    const [ regulares, setRegulares] = useState([]);
+    const [ aereos, setaereos] = useState([]);
+    const [ micros, setMicros] = useState([]);
+    const [ autos, setAutos] = useState([]);
+    const [ hoteles, setHoteles] = useState([]);
 
     useEffect( () => {
-        console.log( '%cse monto el componente', 'color:green');
+
         fetch('http://localhost:5020/api/categorias/ofertas')
             .then( response => response.json())
             .then( dato => {
-                setCategorias(dato.data[0].ofertas)
+                setOfertas(dato.data[0].ofertas)
             })
-            .catch( error => console.error( '%c${error}', 'color: red' ));
+            .catch( error => console.error( error));
+        
+        fetch('http://localhost:5020/api/categorias/regulares')
+            .then( response => response.json())
+            .then( dato => {
+                setRegulares(dato.data[0].regulares)
+            })
+            .catch( error => console.error( error));
+
+        fetch('http://localhost:5020/api/categorias/aereos')
+            .then( response => response.json())
+            .then( dato => {
+                setaereos(dato.data[0].aereos)
+            })
+            .catch( error => console.error( error));
+
+        fetch('http://localhost:5020/api/categorias/micros')
+            .then( response => response.json())
+            .then( dato => {
+                setMicros(dato.data[0].micros)
+            })
+            .catch( error => console.error( error));
+
+        fetch('http://localhost:5020/api/categorias/autos')
+            .then( response => response.json())
+            .then( dato => {
+                setAutos(dato.data[0].autos)
+            })
+            .catch( error => console.error( error));
+
+        fetch('http://localhost:5020/api/categorias/hoteles')
+            .then( response => response.json())
+            .then( dato => {
+                setHoteles(dato.data[0].hoteles)
+            })
+            .catch( error => console.error( error));
 
     }, []);
 
@@ -26,42 +66,42 @@ function CategoriesDB() {
                     <div className="col-lg-6 mb-4">
                         <div className="card bg-info text-white shadow">
                             <div className="card-body">
-                                Paquetes en oferta: { categorias }
+                                Paquetes en oferta: { ofertas }
                             </div>
                         </div>
                     </div>
                     <div className="col-lg-6 mb-4">
                         <div className="card bg-info text-white shadow">
                             <div className="card-body">
-                                Paquetes a precio regular:
+                                Paquetes a precio regular: { regulares }
                             </div>
                         </div>
                     </div>
                     <div className="col-lg-6 mb-4">
                         <div className="card bg-info text-white shadow">
                             <div className="card-body">
-                                Transporte aéreo:
+                                Transporte aéreo: { aereos }
                             </div>
                         </div>
                     </div>
                     <div className="col-lg-6 mb-4">
                         <div className="card bg-info text-white shadow">
                             <div className="card-body">
-                                Transporte por micro:
+                                Transporte por micro: { micros }
                             </div>
                         </div>
                     </div>
                     <div className="col-lg-6 mb-4">
                         <div className="card bg-info text-white shadow">
                             <div className="card-body">
-                                Transporte en auto:
+                                Transporte en auto: { autos }
                             </div>
                         </div>
                     </div>
                     <div className="col-lg-6 mb-4">
                         <div className="card bg-info text-white shadow">
                             <div className="card-body">
-                                Paquetes con salida el proximo mes:
+                                Cantidad de Hoteles: { hoteles }
                             </div>
                         </div>
                     </div>
